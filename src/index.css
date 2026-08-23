@@ -24,15 +24,12 @@
     box-sizing: border-box;
   }
 
-  /* Several decorative elements (split-reveal seam bars, off-screen
-     watermark text) animate via CSS transform past the viewport edge on
-     narrow screens. Transforms shouldn't affect layout, but Chromium's
-     scrollWidth/root-overflow calculation doesn't always agree — hence
-     overflow-x:hidden on BOTH html and body. body alone isn't enough:
-     the root scrolling element browsers actually measure is <html>. */
-  html {
-    overflow-x: hidden;
-  }
+  /* NOTE: do not set a non-"visible" overflow-x (hidden OR clip) on
+     <html> — confirmed by direct testing that it breaks position:sticky
+     for any pinned section on the page (e.g. "Follow the Water"),
+     independent of what overflow-y computes to. The mobile horizontal-
+     overflow bug this used to paper over is fixed at its actual source
+     components instead (see SplitReveal/RevealLine and any wide table). */
 
   body {
     margin: 0;

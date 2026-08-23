@@ -35,7 +35,7 @@ export default function Dashboard() {
         <AdminCard className="p-6">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl text-soil">Recent enquiries</h2>
-            <Link to="/admin/enquiries" className="font-sans text-[11px] uppercase tracking-widest-3 text-terracotta">
+            <Link to="/admin/enquiries" className="p-2 font-sans text-[11px] uppercase tracking-widest-3 text-terracotta">
               View all →
             </Link>
           </div>
@@ -66,7 +66,7 @@ export default function Dashboard() {
         <AdminCard className="p-6">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl text-soil">Content status</h2>
-            <Link to="/admin/packages" className="font-sans text-[11px] uppercase tracking-widest-3 text-terracotta">
+            <Link to="/admin/packages" className="p-2 font-sans text-[11px] uppercase tracking-widest-3 text-terracotta">
               Manage →
             </Link>
           </div>

@@ -142,7 +142,7 @@ export default function SiteSettings() {
             <div key={i} className="rounded-sm border border-soil/10 p-4">
               <div className="flex items-center justify-between">
                 <span className={labelClass}>Item {i + 1}</span>
-                <button type="button" onClick={() => removeFoodItem(i)} className="text-[12px] text-terracotta">
+                <button type="button" onClick={() => removeFoodItem(i)} className="p-2 text-[12px] text-terracotta">
                   Remove
                 </button>
               </div>
@@ -163,7 +163,7 @@ export default function SiteSettings() {
           <button
             type="button"
             onClick={addFoodItem}
-            className="w-fit font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
+            className="w-fit p-2 font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
           >
             + Add food category
           </button>

@@ -90,7 +90,7 @@ export default function Enquiries() {
               <button
                 type="button"
                 onClick={() => handleRemove(e.id)}
-                className="text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
+                className="p-2 text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
               >
                 Remove
               </button>

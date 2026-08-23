@@ -68,14 +68,14 @@ export default function PackageManagement() {
                   <div className="flex items-center justify-end gap-4">
                     <Link
                       to={`/admin/packages/${p.id}`}
-                      className="font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
+                      className="p-2 font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
                     >
                       Edit →
                     </Link>
                     <button
                       type="button"
                       onClick={() => handleDelete(p.id, p.title)}
-                      className="font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-soil/40 hover:text-terracotta"
+                      className="p-2 font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-soil/40 hover:text-terracotta"
                     >
                       Delete
                     </button>

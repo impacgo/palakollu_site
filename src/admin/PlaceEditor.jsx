@@ -75,7 +75,7 @@ export default function PlaceEditor() {
         actions={
           <Link
             to="/admin/places"
-            className="font-sans text-[11px] uppercase tracking-widest-3 text-soil/60 hover:text-terracotta"
+            className="p-2 font-sans text-[11px] uppercase tracking-widest-3 text-soil/60 hover:text-terracotta"
           >
             ← Back to Places
           </Link>

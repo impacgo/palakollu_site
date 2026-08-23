@@ -74,20 +74,20 @@ export default function AdminLayout() {
         <button
           type="button"
           onClick={handleLogout}
-          className="font-sans text-[11px] uppercase tracking-widest-3 text-terracotta"
+          className="p-2 font-sans text-[11px] uppercase tracking-widest-3 text-terracotta"
         >
           Log out
         </button>
       </div>
 
-      <div className="flex-1 md:pt-0 pt-16">
+      <div className="min-w-0 flex-1 md:pt-0 pt-16">
         <nav className="flex gap-1 overflow-x-auto border-b border-soil/10 bg-soil-2/30 px-4 py-2 md:hidden">
           {NAV.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `shrink-0 rounded-sm px-3 py-1.5 font-sans text-[11px] uppercase tracking-widest-3 ${
+                `shrink-0 rounded-sm px-3 py-2 font-sans text-[11px] uppercase tracking-widest-3 ${
                   isActive ? "bg-terracotta text-husk" : "text-soil/60"
                 }`
               }

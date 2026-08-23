@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import Reveal from "./Reveal";
 import palakolluImg from "../assets/photos/place-ksheera-temple.webp";
 import canalsImg from "../assets/photos/about-backdrop.webp";
@@ -58,10 +58,25 @@ function DesktopFollowWater() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const [activeIndex, setActiveIndex] = useState(0);
+  // The stop that's fading OUT on top of the base layer right now, plus a
+  // token so a second rapid change can safely replace an in-progress fade
+  // without racing its own cleanup timer.
+  const [fadingOut, setFadingOut] = useState(null);
+  const fadeTimerRef = useRef(null);
+  const fadeTokenRef = useRef(0);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const idx = indexForProgress(v);
-    setActiveIndex((prev) => (prev === idx ? prev : idx));
+    setActiveIndex((prev) => {
+      if (prev === idx) return prev;
+      setFadingOut(prev);
+      const token = ++fadeTokenRef.current;
+      clearTimeout(fadeTimerRef.current);
+      fadeTimerRef.current = setTimeout(() => {
+        if (fadeTokenRef.current === token) setFadingOut(null);
+      }, 950);
+      return idx;
+    });
   });
 
   const pathLength = useTransform(scrollYProgress, [0.08, 0.85], [0, 1]);
@@ -71,21 +86,31 @@ function DesktopFollowWater() {
   return (
     <section ref={ref} className="relative hidden h-[320vh] bg-soil-deep md:block">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <AnimatePresence>
+        {/* Base layer: always the correct, current stop, at full opacity
+            with no transition — this is what guarantees the section is
+            never blank, regardless of how the fade-out overlay below is
+            timed. The overlay is purely a cosmetic veil on top of it. */}
+        <motion.img
+          style={{ scale: imageScale }}
+          src={STOPS[activeIndex].img}
+          alt={STOPS[activeIndex].alt}
+          loading={activeIndex === 0 ? "eager" : "lazy"}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {fadingOut !== null && (
           <motion.img
-            key={STOPS[activeIndex].label}
+            key={fadingOut}
             style={{ scale: imageScale }}
-            src={STOPS[activeIndex].img}
-            alt={STOPS[activeIndex].alt}
-            loading={activeIndex === 0 ? "eager" : "lazy"}
+            src={STOPS[fadingOut].img}
+            alt=""
             decoding="async"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
             transition={{ duration: 0.9, ease: "easeInOut" }}
             className="absolute inset-0 h-full w-full object-cover"
           />
-        </AnimatePresence>
+        )}
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-soil-deep via-transparent to-soil-deep" />
 

@@ -125,7 +125,7 @@ export default function PackageEditor() {
         actions={
           <Link
             to="/admin/packages"
-            className="font-sans text-[11px] uppercase tracking-widest-3 text-soil/60 hover:text-terracotta"
+            className="p-2 font-sans text-[11px] uppercase tracking-widest-3 text-soil/60 hover:text-terracotta"
           >
             ← Back to Packages
           </Link>
@@ -230,7 +230,7 @@ export default function PackageEditor() {
               <button
                 type="button"
                 onClick={() => removeRow("priceLines", i)}
-                className="shrink-0 text-[12px] text-terracotta"
+                className="shrink-0 p-2 text-[12px] text-terracotta"
               >
                 Remove
               </button>
@@ -239,7 +239,7 @@ export default function PackageEditor() {
           <button
             type="button"
             onClick={() => addRow("priceLines", { label: "", amt: "" })}
-            className="w-fit font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
+            className="w-fit p-2 font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
           >
             + Add line item
           </button>
@@ -253,7 +253,7 @@ export default function PackageEditor() {
                 <button
                   type="button"
                   onClick={() => removeRow("itinerary", i)}
-                  className="text-[12px] text-terracotta"
+                  className="p-2 text-[12px] text-terracotta"
                 >
                   Remove
                 </button>
@@ -275,7 +275,7 @@ export default function PackageEditor() {
           <button
             type="button"
             onClick={() => addRow("itinerary", { title: "", desc: "" })}
-            className="w-fit font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
+            className="w-fit p-2 font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
           >
             + Add day
           </button>
@@ -290,14 +290,14 @@ export default function PackageEditor() {
             <div key={i} className="rounded-sm border border-soil/10 p-4">
               <div className="flex items-center justify-between">
                 <span className={labelClass}>Stop {i + 1}</span>
-                <div className="flex items-center gap-3">
-                  <button type="button" onClick={() => moveRow("waypoints", i, -1)} disabled={i === 0} className="text-[12px] text-soil/60 disabled:opacity-30">
+                <div className="flex items-center gap-1">
+                  <button type="button" onClick={() => moveRow("waypoints", i, -1)} disabled={i === 0} className="px-2.5 py-2 text-[12px] text-soil/60 disabled:opacity-30">
                     ↑
                   </button>
-                  <button type="button" onClick={() => moveRow("waypoints", i, 1)} disabled={i === form.waypoints.length - 1} className="text-[12px] text-soil/60 disabled:opacity-30">
+                  <button type="button" onClick={() => moveRow("waypoints", i, 1)} disabled={i === form.waypoints.length - 1} className="px-2.5 py-2 text-[12px] text-soil/60 disabled:opacity-30">
                     ↓
                   </button>
-                  <button type="button" onClick={() => removeRow("waypoints", i)} className="text-[12px] text-terracotta">
+                  <button type="button" onClick={() => removeRow("waypoints", i)} className="p-2 text-[12px] text-terracotta">
                     Remove
                   </button>
                 </div>
@@ -331,7 +331,7 @@ export default function PackageEditor() {
           <button
             type="button"
             onClick={() => addRow("waypoints", { title: "", desc: "", placeId: "" })}
-            className="w-fit font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
+            className="w-fit p-2 font-sans text-[11.5px] font-semibold uppercase tracking-widest-3 text-terracotta"
           >
             + Add stop
           </button>
