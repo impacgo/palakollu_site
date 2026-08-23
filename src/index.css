@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme {
+  --color-soil: #0c1b13;
+  --color-soil-deep: #07120d;
+  --color-soil-2: #152c20;
+  --color-turmeric: #d4a13d;
+  --color-turmeric-soft: #e8c274;
+  --color-gold-soft: #b88b37;
+  --color-terracotta: #b84d36;
+  --color-paddy: #718b55;
+  --color-paddy-deep: #4e6b3d;
+  --color-river: #315e63;
+  --color-river-light: #5e8585;
+  --color-husk: #f2e9d5;
+  --color-husk-dim: #ddd2b9;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Jost", sans-serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Several decorative elements (split-reveal seam bars, off-screen
+     watermark text) animate via CSS transform past the viewport edge on
+     narrow screens. Transforms shouldn't affect layout, but Chromium's
+     scrollWidth/root-overflow calculation doesn't always agree — hence
+     overflow-x:hidden on BOTH html and body. body alone isn't enough:
+     the root scrolling element browsers actually measure is <html>. */
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-soil-deep);
+    color: var(--color-husk);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--color-turmeric);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Fine film-grain laid over the whole page so every section — photo or
+     flat color — reads as one continuous, tactile surface like the hero. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .tracking-widest-2 {
+    letter-spacing: 0.32em;
+  }
+
+  .tracking-widest-3 {
+    letter-spacing: 0.18em;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(-1%, -1%, 0);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 26s ease-in-out infinite alternate;
+}
+
+@keyframes ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-ring-spin {
+  animation: ring-spin 12s linear infinite;
+}
+
+.text-shadow-hero {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 4px rgba(0, 0, 0, 0.65);
+}
+
+.text-shadow-soft {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle woven crosshatch — keeps flat-color sections from feeling bare
+   next to the photographic ones, nodding to handloom textile patterns. */
+.bg-village-weave {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(217, 164, 65, 0.05) 0 1px, transparent 1px 16px),
+    repeating-linear-gradient(-45deg, rgba(217, 164, 65, 0.05) 0 1px, transparent 1px 16px);
+}
+
+/* A hand-stitched seam — the recurring "kantha embroidery" thread that ties
+   each section together, echoing village needlework. */
+.stitch-seam {
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-turmeric) 0 7px,
+    transparent 7px 15px
+  );
+  opacity: 0.3;
+}
